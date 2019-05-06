@@ -2,6 +2,7 @@ import java.io.IOException;
 
 public class Board {
 
+
     public Piece[][] board = new Piece[8][8];
 
     public Board(){
@@ -142,7 +143,7 @@ public class Board {
         if(actuallyMove){
             Piece piece = board[moveArray[2]][moveArray[3]];
             //This way it gets toggled the next time it moves
-            piece.ep_able = false;
+
             if(piece != null){
                 if(piece.getClass().isInstance(new Pawn("white"))){
                     //The piece is a pawn
@@ -389,5 +390,4 @@ public class Board {
 
         return reverseString;
     }
-
 }

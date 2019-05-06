@@ -45,7 +45,7 @@ public class Rook extends Piece{
             for(int x = currentCol + offset; x != newCol; x += offset){
                 //Go from currentCol to newCol, and check every space
                 if(board[currentRow][x] != null){
-                    
+
                     return false;
                 }
             }
