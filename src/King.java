@@ -42,7 +42,7 @@ public class King extends Piece{
 
         }
 
-        hasMoved = true;
+        //hasMoved = true;
         return true;
     }
 

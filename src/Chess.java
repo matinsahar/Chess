@@ -31,7 +31,7 @@ public class Chess {
                 }
 
                 try {
-                    gameBoard.performMove(move, color);
+
                     gameBoard.performMove(move, color, true);
                 } catch (IOException e) {
                     // Ask for user input again
