@@ -6,7 +6,7 @@ public class Bishop extends Piece{
         this.color = color;
     }
 
-   
+
     public boolean validateMove(Piece[][] board, int currentRow, int currentCol, int newRow, int newCol) {
         System.out.println("currentRow: " + currentRow + " currentCol: " + currentCol + " newRow: " + newRow + " newCol: " + newCol);
 
