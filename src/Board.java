@@ -1,3 +1,9 @@
+/**
+ * Author : Matin Saharkhiz
+ * version : 1.0
+ *
+ */
+
 import java.io.IOException;
 
 public class Board {
@@ -9,6 +15,9 @@ public class Board {
         this.initialize();
     }
 
+    /**
+     * initializes the board
+     */
     private void initialize(){
         for(int x = 0; x<board.length; x++){
             for(int y = 0; y<board[0].length; y++){
@@ -79,7 +88,9 @@ public class Board {
 
     /**
      * Performs the move, and modifies the actual board
-     *
+     * @param move move command
+     * @param color
+     * @param actuallyMove if move command was readable and doable it is true else it is false
      * @throws IOException
      */
     public void performMove(String move, String color, boolean actuallyMove) throws IOException{
@@ -174,34 +185,18 @@ public class Board {
                         }
                     }
 
-                    //En passante capture
-                    /*int newCol = moveArray[3];
-                      int newRow = moveArray[2];
-                      if(inSixthRank(color, newRow)){
-                      if(newCol + 1 < 8){
-                      if(board[newRow][newCol + 1] != null){
-                      if(board[newRow][newCol + 1].getClass().isInstance(new Pawn("white"))){
-                      if(board[][].ep_able){
-                      board[][] = null;
-                      }
-                      }
-                      }
-                      }else if(newCol - 1 > 0){
-                      if(board[newRow][newCol - 1] != null){
-                      if(board[newRow][newCol - 1].getClass().isInstance(new Pawn("white"))){
-                      if(board[][].ep_able){
-                      board[][] = null;
-                      }
-                      }
-                      }
-                      }
-                      }*/
 
                 }
             }
         }
     }
 
+    /**
+     *
+     * @param color
+     * @param rank
+     * @return if the row in front of the pawns is rank (5 for white and 2 for black) return true; else false
+     */
     private boolean inSixthRank(String color, int rank){
         if(color.equals("white")){
             return rank == 5;
@@ -212,7 +207,7 @@ public class Board {
 
     /**
      * Parses the user's string input for a move
-     * @param move
+     * @param move move com
      * @return An array of size 4 with the initial x, y positions and the final x, y positions in that order
      */
     public static int[] parseInput(String move){
@@ -245,6 +240,11 @@ public class Board {
         }
     }
 
+    /**
+     * returns poisition of king
+     * @param color
+     * @return returns x,y of king
+     */
     private int[] getKingPos(String color){
         int row = 0, col = 0;
 
@@ -268,7 +268,8 @@ public class Board {
 
     /**
      * Checks to see if any moves are possible. If not, then it is either a checkmate or stalemate, depending on whether or not anyone is currently in check.
-     * @return
+     * @param color
+     * @return true if they can make move false if they cant
      */
     public boolean canAnyPieceMakeAnyMove(String color){
 
@@ -301,6 +302,14 @@ public class Board {
         return false;
     }
 
+    /**
+     * reads the move command string
+     * @param row
+     * @param col
+     * @param newRow
+     * @param newCol
+     * @return converts column from a-h to number of col (a5 b7 --> 05 17)
+     */
     private String coordinatesToMoveString(int row, int col, int newRow, int newCol){
 
         String returnString = "";
@@ -344,6 +353,7 @@ public class Board {
 
     /**
      * Checks to see if there is a stalemate
+     * @param color
      * @return true if stalemated, false otherwise
      */
     public boolean staleMate(String color){
