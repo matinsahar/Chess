@@ -16,6 +16,8 @@ import javax.swing.border.LineBorder;
 
 public class Graphic {
 
+
+
     Chess game = new Chess();
     private MouseEvent a;
     JButton [][] buttons = new JButton[9][9];
@@ -83,6 +85,7 @@ public class Graphic {
 
         for(int x=1; x<9; x++){
             buttons[1][x] = new Pawn("black");
+
         }
 
         // white pawns
@@ -208,11 +211,14 @@ int moving = 0;
         String movestring;
         @Override
         public void mouseClicked(MouseEvent e) {
-
+            for (Integer row = 0; row < 9; row++)
+                for (Integer col = 1; col < 9; col++) {
+                    buttons[row][col].setEnabled(true);
+                }
             if(moving%2 == 0){
+                JButton butt = (JButton) e.getSource();
                 for (Integer row = 0; row < 9; row++)
                     for (Integer col = 1; col < 9; col++) {
-                        JButton butt = (JButton) e.getSource();
                         if (butt.equals(buttons[row][col]) && (buttons[row][col] instanceof Piece)) {
                             Piece r = (Piece) butt;
                             color = r.getColor();
@@ -221,7 +227,7 @@ int moving = 0;
                             for (int i = 0; i < 8; i++)
                                 for (int j = 0; j < 8; j++){
                                     if ( r.getPossibleMoves(board , row   , col -1 )[i][j])
-                                        buttons[i][j+1].setBackground(Color.blue);
+                                        buttons[i][j+1].setEnabled(false);
                                 }
                         }
 
@@ -242,11 +248,7 @@ int moving = 0;
                             System.out.println(movestring);
                             Piece p = (Piece)buttons[currenrow][currenntcol];
                             Piece[][] oldBoard = game.gameBoard.board.clone();
-
-                                game.gameplay(movestring);
-
-
-                            if(!oldBoard.equals(game.gameBoard.board)){
+                            if (!game.gameplay(movestring).equals("Invalid input!")){
                                 buttons[nextrow][nextcol] = buttons [currenrow][currenntcol] ;
                                 buttons [currenrow][currenntcol] = null;
                             }
